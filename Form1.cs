@@ -184,5 +184,10 @@ namespace CRUDSederhana1
                 MessageBoxIcon.Information);
         }
 
+        private void dgvMahasiswa_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
     }
 }
