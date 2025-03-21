@@ -117,6 +117,60 @@ namespace CRUDSederhana1
             }
         }
 
+        private void btnHapus_Click(object sender, EventArgs e)
+        {
+            if (dgvMahasiswa.SelectedRows.Count > 0)
+            {
+                DialogResult confirm = MessageBox.Show(
+                    "Yakin ingin menghapus data ini?", "Konfirmasi",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (confirm == DialogResult.Yes)
+                {
+                    MySqlConnection conn = new MySqlConnection(connectionString);
+
+                    try
+                    {
+                        string nim = dgvMahasiswa.SelectedRows[0].Cells["NIM"].Value.ToString();
+                        conn.Open();
+                        string query = "delete from mahasiswa " +
+                            "where NIM = @NIM";
+                        MySqlCommand cmd = new MySqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@NIM", nim);
+                        int rowAffected = cmd.ExecuteNonQuery();
+                        if (rowAffected > 0)
+                        {
+                            MessageBox.Show(
+                                "Data berhasil dihapus!", "Sukses",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                            LoadData();
+                            ClearForm();
+                        }
+                        else
+                        {
+                            MessageBox.Show(
+                                "Data tidak ditemukan atau gagal dihapus!", "Kesalahan",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(
+                            "Error: " +
+                            ex.Message, "Kesalahan",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Pilih data yang akan dihapus!", "Peringatan",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
 
     }
 }
