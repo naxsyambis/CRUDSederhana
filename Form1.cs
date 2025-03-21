@@ -171,6 +171,18 @@ namespace CRUDSederhana1
             }
         }
 
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            LoadData();
+
+            //Debugging: cek jumlah kolom dan baris
+            MessageBox.Show(
+                $"jumlah kolom:{dgvMahasiswa.ColumnCount}\n" +
+                $"Jumlah Baris: {dgvMahasiswa.RowCount}",
+                "Debugging DataGridView",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
 
     }
 }
