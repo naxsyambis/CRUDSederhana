@@ -22,7 +22,7 @@ namespace CRUDSederhana1
 
         private void Form1_Load(object sender, EventArgs e) //ini berfungsi untuk memeproses data 
         {
-            
+            LoadData();
         }
 
         private void ClearForm()
